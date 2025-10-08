@@ -1,6 +1,7 @@
 use core::fmt;
 use std::ops::Deref;
 
+#[macro_export]
 macro_rules! self_format {
     ($($arg:tt)*) => {
         $crate::lib_str::string_proc::SelfString::from(format!($($arg)*))
@@ -8,14 +9,16 @@ macro_rules! self_format {
 }
 
 /// This struct should derive Copy and display trait
-/// For comparing and something else 
+/// for comparing and something else
+/// And this struct will work as a simplified String
+/// with from<String> and from<str> 
 #[derive(PartialEq, Eq, Debug)]
 pub struct SelfString {
     inner: Vec<u8>
 }
 
 impl SelfString {
-    fn new() -> Self {
+    pub fn new() -> Self {
         SelfString {
             inner: Vec::new()
         }

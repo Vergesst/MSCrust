@@ -40,7 +40,35 @@ mod test {
         assert_eq!("Hello From Cargo", Organization::greet());
     }
 
+/// This is tests for SelfString struct
+/// your `self_format!` macro and other functions about SelfString
+/// your SelfString should works like a simple string
+/// # Example Code
+/// ```rust
+/// let var = 3;
+/// let res_s_str = self_format!("nothing {}", var);
+/// let res_s_str = SelfString::from("static str"); // from simple &'a static str
+/// let res_s_str = SelfString::from(format!("string is"));
+/// ```
     #[test]
     fn test_str() {
+        use crate::self_format;
+        use super::lib_str::string_proc::*;
+
+        let var = 3;
+        let res_s_str = self_format!("nothing {}", var);
+
+        let res_str = format!("nothing {}", var);
+
+        assert_eq!(res_s_str, res_str);
+        assert_eq!(res_str, res_s_str);
+
+        // from trait
+        let mut f_str = SelfString::new(); 
+        f_str = SelfString::from("from str");
+        let f_string = SelfString::from("from string");
+
+        assert_eq!(f_str, self_format!("from str"));
+        assert_eq!(f_string, self_format!("from string"));
     }
 }
