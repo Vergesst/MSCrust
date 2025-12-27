@@ -2,7 +2,7 @@ use std::process::Command;
 
 /// preparation task
 /// use the main function to display your rust toolchain
-/// hint: achieve this goal with std::command::Process
+/// hint: achieve this goal with `std::command::Process`
 fn main() -> Result<(), std::io::Error> {
     let mut cmd = Command::new("rustup");
     cmd.arg("toolchain").arg("list").status()?;
@@ -19,6 +19,7 @@ impl InlineModule {
 
 mod lib_str;
 mod lib_greet;
+mod lib_proc_macro;
 mod test {
 /// This is about code organization
 /// Add use ans mod statement
@@ -70,5 +71,12 @@ mod test {
 
         assert_eq!(f_str, self_format!("from str"));
         assert_eq!(f_string, self_format!("from string"));
+    }
+
+    #[test]
+    fn test_macro() {
+        let v = vec![3];
+        let boo = v.iter().fold(true, |acc, &it| it == 3 && acc);
+        println!("{}", boo)
     }
 }
